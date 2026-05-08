@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String          @id @default(uuid())
+  phone            String          @unique
+  displayName      String?
+  currentWeightLbs Decimal?
+  goalWeightLbs    Decimal?
+  experienceLevel  String?
+  createdAt        DateTime        @default(now())
+
+  weightEntries    WeightEntry[]
+  sessions         Session[]
+  progressPhotos   ProgressPhoto[]
+  messages         Message[]
+}
+
+model WeightEntry {
+  id          String   @id @default(uuid())
+  userId      String
+  weightLbs   Decimal
+  recordedAt  DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model Session {
+  id            String    @id @default(uuid())
+  userId        String
+  sessionNumber Int
+  sessionType   String?
+  notes         String?
+  status        String    @default("draft")
+  loggedAt      DateTime?
+  createdAt     DateTime  @default(now())
+
+  user          User      @relation(fields: [userId], references: [id])
+  sets          Set[]
+}
+
+model Exercise {
+  id           String   @id @default(uuid())
+  name         String
+  muscleGroups String[]
+  equipment    String[]
+  aliases      String[]
+
+  sets         Set[]
+}
+
+model Set {
+  id           String    @id @default(uuid())
+  sessionId    String
+  exerciseId   String?
+  exerciseName String
+  setNumber    Int
+  weightValue  Decimal?
+  weightUnit   String    @default("lbs")
+  reps         Int?
+  rpe          Decimal?
+  notes        String?
+  completed    Boolean   @default(false)
+
+  session      Session   @relation(fields: [sessionId], references: [id])
+  exercise     Exercise? @relation(fields: [exerciseId], references: [id])
+}
+
+model ProgressPhoto {
+  id          String   @id @default(uuid())
+  userId      String
+  photoUrl    String
+  photoDate   DateTime
+  bodyWeight  Decimal?
+  notes       String?
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model Message {
+  id          String   @id @default(uuid())
+  userId      String
+  role        String
+  content     String
+  workoutData Json?
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id])
+}
