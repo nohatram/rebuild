@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {
   useFonts,
   FiraCode_300Light,
@@ -32,11 +31,9 @@ export default function App() {
   if (!fontsLoaded && !fontError) return null;
 
   return (
-    <GestureHandlerRootView style={{ flex: 1, backgroundColor: T.bg }}>
+    <View style={{ flex: 1, backgroundColor: T.bg }} onLayout={onLayoutRootView}>
       <StatusBar style="light" backgroundColor={T.bg} />
-      <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-        <AppNavigator />
-      </View>
-    </GestureHandlerRootView>
+      <AppNavigator />
+    </View>
   );
 }
