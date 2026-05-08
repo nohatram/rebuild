@@ -1,0 +1,13 @@
+{
+  "name": "rebuild",
+  "private": true,
+  "workspaces": ["app", "server"],
+  "scripts": {
+    "app": "yarn workspace app start",
+    "server": "yarn workspace server dev",
+    "dev": "concurrently \"yarn server\" \"yarn app\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
