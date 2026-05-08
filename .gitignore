@@ -1,0 +1,24 @@
+node_modules/
+.env
+.env.local
+dist/
+build/
+.expo/
+*.log
+.DS_Store
+coverage/
+
+# Expo
+ios/
+android/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# EAS
+.easignore
+
+# Prisma (keep schema, ignore generated migrations until you're ready to commit them)
+# prisma/migrations/   ← commented out: you'll want to commit migrations eventually
