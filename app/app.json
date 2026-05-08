@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Rebuild",
+    "slug": "rebuild",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "backgroundColor": "#131212"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.rebuild.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#131212"
+      },
+      "package": "com.rebuild.app"
+    },
+    "plugins": [
+      "expo-font",
+      "expo-secure-store",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Rebuild uses your photos for progress tracking."
+        }
+      ]
+    ]
+  }
+}
